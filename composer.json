@@ -1,15 +1,16 @@
 {
-    "name": "aaron/orm-container-test",
+    "name": "pikajew002/handrolled-project",
+    "description": "A starting point for using the Handrolled package in your own dope PHP project",
     "type": "project",
     "license": "MIT",
     "authors": [
         {
-            "name": "Aaron",
+            "name": "Aaron Eisenberg",
             "email": "aaron@ironmthome.com"
         }
     ],
     "require": {
-        "pikajew002/handrolled": "^0.2"
+        "pikajew002/handrolled": "^0.2.0"
     },
     "autoload": {
         "psr-4": {
