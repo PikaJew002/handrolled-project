@@ -19,8 +19,8 @@ class UsersController
 
     public function view($id): Response
     {
-        $user = User::find($id);
-        if(empty($user)) {
+        $user = User::findById($id);
+        if(is_null($user)) {
             return new NotFoundResponse();
         }
         return new JsonResponse(['data' => $user]);
@@ -29,22 +29,20 @@ class UsersController
     public function store(Request $request): Response
     {
         $user = new User;
-        // $user->email = $request->input('email');
-        // $user->first_name = $request->input('first_name');
-        // $user->last_name = $request->input('last_name');
-        // $user->save();
+        $user->email = $request->input('email');
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->save();
 
         return new JsonResponse([
-            'data' => [
-                'message' => $request->input('first_name'),
-            ],
+            'data' => $user,
         ], 201);
     }
 
     public function destroy($id): Response
     {
-        $user = User::find($id);
-        if(empty($user)) {
+        $user = User::findById($id);
+        if(is_null($user)) {
             return new NotFoundResponse();
         }
         if($user->delete()) {
