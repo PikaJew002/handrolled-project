@@ -9,8 +9,14 @@
             "email": "aaron@ironmthome.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../handrolled-package"
+        }
+    ],
     "require": {
-        "pikajew002/handrolled": "^0.2.0"
+        "pikajew002/handrolled": "@dev"
     },
     "autoload": {
         "psr-4": {

@@ -2,10 +2,12 @@
 
 $app = new \PikaJew002\Handrolled\Application\Application();
 
-$app->bootConfig(realpath(__DIR__.'/../'), realpath(__DIR__.'/../config/'));
+$app->bootConfig();
 
-$app->bootRoutes(realpath(__DIR__.'/../routes/api.php'));
+$app->bootRoutes();
 
 $app->bootDatabase();
+
+$app->bootAuth();
 
 return $app;
