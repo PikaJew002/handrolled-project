@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use PikaJew002\Handrolled\Auth\Manager as AuthManager;
-use PikaJew002\Handrolled\Exceptions\HttpException;
+use PikaJew002\Handrolled\Exceptions\Http\HttpException;
 use PikaJew002\Handrolled\Http\Request;
 use PikaJew002\Handrolled\Http\Responses\JsonResponse;
 
@@ -14,7 +14,7 @@ class LoginController
     {
         $user = User::checkCredentials($request->input('email'), $request->input('password'));
         if(!is_null($user)) {
-            $user->setAuthCookie($request, $auth);
+            $user->setAuthEdible($request, $auth);
             $request->setUser($user);
             return new JsonResponse([
               'user' => $user,

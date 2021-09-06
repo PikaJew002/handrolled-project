@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use PikaJew002\Handrolled\Exceptions;
 use Exception;
+use PikaJew002\Handrolled\Exceptions;
 use PikaJew002\Handrolled\Http\Request;
+use PikaJew002\Handrolled\Http\Responses\HttpErrors\NotFoundResponse;
 use PikaJew002\Handrolled\Http\Responses\JsonResponse;
-use PikaJew002\Handrolled\Http\Responses\NotFoundResponse;
 use PikaJew002\Handrolled\Interfaces\Response;
 
 class UsersController

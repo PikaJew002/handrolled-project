@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use PikaJew002\Handrolled\Database\ORM\Entity;
+use PikaJew002\Handrolled\Database\Orm\Entity;
 use PikaJew002\Handrolled\Interfaces\User as UserInterface;
-use PikaJew002\Handrolled\Traits\UsesAuthCookie;
+use PikaJew002\Handrolled\Traits\Edibles;
 
 class User extends Entity implements UserInterface
 {
-    use UsesAuthCookie;
+    use Edibles;
 
     protected string $tableName = 'users';
 
@@ -46,13 +46,5 @@ class User extends Entity implements UserInterface
         }
 
         return null;
-    }
-
-    /*
-     * -> must implement in every class that extends Entity
-     */
-    public static function getTableName(): string
-    {
-        return $tableName ?? "users";
     }
 }
