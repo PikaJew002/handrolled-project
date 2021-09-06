@@ -11,7 +11,7 @@ return simpleDispatcher(function(RouteCollector $r) {
             'class' => UsersController::class,
             'method' => 'index',
             'middleware' => [
-                \PikaJew002\Handrolled\Http\Middleware\AuthenticateSession::class,
+                \PikaJew002\Handrolled\Http\Middleware\AuthenticateEdible::class,
             ],
         ]);
         // {id} must be a number (\d+)
@@ -19,21 +19,21 @@ return simpleDispatcher(function(RouteCollector $r) {
             'class' => UsersController::class,
             'method' => 'view',
             'middleware' => [
-                \PikaJew002\Handrolled\Http\Middleware\AuthenticateSession::class,
+                \PikaJew002\Handrolled\Http\Middleware\AuthenticateEdible::class,
             ],
         ]);
         $r->post('/user', [
             'class' => UsersController::class,
             'method' => 'store',
             'middleware' => [
-                \PikaJew002\Handrolled\Http\Middleware\AuthenticateSession::class,
+                \PikaJew002\Handrolled\Http\Middleware\AuthenticateEdible::class,
             ],
         ]);
         $r->delete('/user/{id:\d+}', [
             'class' => UsersController::class,
             'method' => 'destroy',
             'middleware' => [
-                \PikaJew002\Handrolled\Http\Middleware\AuthenticateSession::class,
+                \PikaJew002\Handrolled\Http\Middleware\AuthenticateEdible::class,
             ],
         ]);
         $r->post('/user/login', Auth\LoginController::class);
