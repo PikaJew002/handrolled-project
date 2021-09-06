@@ -47,12 +47,4 @@ class User extends Entity implements UserInterface
 
         return null;
     }
-
-    /*
-     * -> must implement in every class that extends Entity
-     */
-    public static function getTableName(): string
-    {
-        return $tableName ?? "users";
-    }
 }
