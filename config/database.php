@@ -13,21 +13,24 @@ return [
       port (optional): The port to connect on
 
       Currently supported database drivers:
-        - MySQL
+        - MySQL (default)
         - PostgreSQL
     */
-    'mysql' => [
-        'host' => $_ENV['DB_HOST'],
-        'database' => $_ENV['DB_DATABASE'],
-        'username' => $_ENV['DB_USERNAME'],
-        'password' => $_ENV['DB_PASSWORD'],
-        'class' => MySQL::class,
-    ],
-    'pgsql' => [
-        'host' => $_ENV['DB_HOST'],
-        'database' => $_ENV['DB_DATABASE'],
-        'username' => $_ENV['DB_USERNAME'],
-        'password' => $_ENV['DB_PASSWORD'],
-        'class' => PostgreSQL::class,
+    'driver' => env('DB_DRIVER', 'mysql'),
+    'drivers' => [
+        'mysql' => [
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'database' => env('DB_DATABASE', 'handrolled'),
+            'username' => env('DB_USERNAME', 'handrolled'),
+            'password' => env('DB_PASSWORD', ''),
+            'class' => MySQL::class,
+        ],
+        'pgsql' => [
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'database' => env('DB_DATABASE', 'handrolled'),
+            'username' => env('DB_USERNAME', 'handrolled'),
+            'password' => env('DB_PASSWORD', ''),
+            'class' => PostgreSQL::class,
+        ],
     ],
 ];
