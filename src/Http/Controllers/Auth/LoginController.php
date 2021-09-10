@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use PikaJew002\Handrolled\Auth\Manager as AuthManager;
-use PikaJew002\Handrolled\Exceptions\Http\HttpException;
+use PikaJew002\Handrolled\Http\Exceptions\HttpException;
 use PikaJew002\Handrolled\Http\Request;
 use PikaJew002\Handrolled\Http\Responses\JsonResponse;
+use PikaJew002\Handrolled\Http\Responses\HttpErrors\ForbiddenResponse;
 
 class LoginController
 {
@@ -19,8 +20,7 @@ class LoginController
             return new JsonResponse([
               'user' => $user,
             ]);
-            throw new HttpException(403, 'Session already set!');
         }
-        throw new HttpException(403, 'Invalid username, password combo');
+        return new ForbiddenResponse('Invalid username, password combination');
     }
 }
