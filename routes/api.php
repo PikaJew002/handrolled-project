@@ -2,41 +2,23 @@
 
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\Auth;
-use FastRoute\RouteCollector;
-use function FastRoute\simpleDispatcher;
+use PikaJew002\Handrolled\Http\Middleware\AuthenticateEdible;
+use PikaJew002\Handrolled\Router\Definition\RouteCollector;
+use PikaJew002\Handrolled\Router\Definition\RouteGroup;
 
-return simpleDispatcher(function(RouteCollector $r) {
-    $r->addGroup('/api', function (RouteCollector $r) {
-        $r->get('/users', [
-            'class' => UsersController::class,
-            'method' => 'index',
-            'middleware' => [
-                \PikaJew002\Handrolled\Http\Middleware\AuthenticateEdible::class,
-            ],
-        ]);
-        // {id} must be a number (\d+)
-        $r->get('/user/{id:\d+}', [
-            'class' => UsersController::class,
-            'method' => 'view',
-            'middleware' => [
-                \PikaJew002\Handrolled\Http\Middleware\AuthenticateEdible::class,
-            ],
-        ]);
-        $r->post('/user', [
-            'class' => UsersController::class,
-            'method' => 'store',
-            'middleware' => [
-                \PikaJew002\Handrolled\Http\Middleware\AuthenticateEdible::class,
-            ],
-        ]);
-        $r->delete('/user/{id:\d+}', [
-            'class' => UsersController::class,
-            'method' => 'destroy',
-            'middleware' => [
-                \PikaJew002\Handrolled\Http\Middleware\AuthenticateEdible::class,
-            ],
-        ]);
-        $r->post('/user/login', Auth\LoginController::class);
-        $r->post('/user/logout', Auth\LogoutController::class);
-    });
+$route = new RouteCollector();
+
+$route->addGroup('/api', function (RouteGroup $routeGroup) {
+    $routeGroup->get('/users', [UsersController::class, 'index']);
+    // an alias for $routeGroup->addRoute('GET', '/users', [UsersController::class, 'index']);
+    $routeGroup->get('/user/{id:\d+}', [UsersController::class, 'view']);
+    $routeGroup->post('/user', [UsersController::class, 'store']);
+    $routeGroup->delete('/user/{id:\d+}', [UsersController::class, 'destroy']);
+})->middleware(AuthenticateEdible::class);
+
+$route->addGroup('/auth', function(RouteGroup $routeGroup) {
+    $routeGroup->post('/user/login', Auth\LoginController::class);
+    $routeGroup->post('/user/logout', Auth\LogoutController::class);
 });
+
+return $route;
