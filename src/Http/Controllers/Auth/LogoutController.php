@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use PikaJew002\Handrolled\Auth\Manager as AuthManager;
-use PikaJew002\Handrolled\Exceptions\Http\HttpException;
+use PikaJew002\Handrolled\Http\Exceptions\HttpException;
 use PikaJew002\Handrolled\Http\Request;
 use PikaJew002\Handrolled\Http\Responses\JsonResponse;
-use PikaJew002\Handrolled\Http\Responses\RequestTimedOutResponse;
+use PikaJew002\Handrolled\Http\Responses\HttpErrors\RequestTimeoutResponse;
 
 class LogoutController
 {
@@ -17,6 +17,6 @@ class LogoutController
             User::invalidateAuthEdible($auth);
             return new JsonResponse(['Successfully logged out.']);
         }
-        return new RequestTimedOutResponse();
+        return new RequestTimeoutResponse();
     }
 }
