@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Handrolled | {{ title }}</title>
+    {% block styles %}{% endblock %}
+  </head>
+  <body>
+    <main>
+      {% block content %}
+        This is the parent content
+      {% endblock %}
+    </main>
+  </body>
+</html>
