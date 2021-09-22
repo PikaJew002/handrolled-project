@@ -1,2 +1,5 @@
 vendor/
+node_modules/
 .env
+boot/cache/
+public/css/app.css
