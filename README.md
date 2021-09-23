@@ -14,4 +14,4 @@ cd project-directory
 composer install
 ```
 
-For more information on how to use Handrolled in your project and make it super lit, check out the `README.md` file in the `PikaJew002/handrolled` repository.
+For more information on how to use Handrolled in your project and make it super lit, check out the [docs](https://pikajew002.github.io/handrolled/).
