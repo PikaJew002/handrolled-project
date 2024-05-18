@@ -2,8 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Handrolled | {{ title }}</title>
-    {% block styles %}{% endblock %}
+    <title>{{ app.name }} | {{ title }}</title>
+    {% block styles %}
+      <link rel="stylesheet" href="css/app.css">
+    {% endblock %}
   </head>
   <body>
     <main>

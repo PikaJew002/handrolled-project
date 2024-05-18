@@ -1,0 +1,18 @@
+{% extends "layouts/app.twig.html" %}
+
+{% set title = "Welcome" %}
+
+{% block styles %}
+  <link rel="stylesheet" href="css/app.css">
+{% endblock %}
+
+{% block content %}
+  <header>
+    <h1 class="text-xl font-bold px-4 py-2">
+      {{ title }}
+    </h1>
+  </header>
+  <div class="container px-4">
+    This is some welcome text to unauthenticated users.
+  </div>
+{% endblock %}

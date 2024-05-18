@@ -5,7 +5,7 @@
     "license": "MIT",
     "authors": [],
     "require": {
-        "pikajew002/handrolled": "^0.5.1"
+        "pikajew002/handrolled": "^1.0.1"
     },
     "autoload": {
         "psr-4": {

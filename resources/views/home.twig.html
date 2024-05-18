@@ -1,10 +1,6 @@
 {% extends "layouts/app.twig.html" %}
 
-{% set title = "Welcome" %}
-
-{% block styles %}
-  <link rel="stylesheet" href="css/app.css">
-{% endblock %}
+{% set title = "Home" %}
 
 {% block content %}
   <header>
@@ -13,7 +9,14 @@
     </h1>
   </header>
   <div class="container px-4">
-    <p>This is the child content.</p>
-    <p>{{ variable }}</p>
+    <h4 class="text-lg font-semibold pb-2">Hi, {{ user.name }}</h4>
+    <p>
+      This is some 'home' page text for users who are authenticated.
+    </p>
+    <p>
+      <form action="/auth/logout" method="post">
+        <button type="submit">Logout</button>
+      </form>
+    </p>
   </div>
 {% endblock %}

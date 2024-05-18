@@ -4,13 +4,14 @@ namespace App\Models;
 
 use PikaJew002\Handrolled\Database\Orm\Entity;
 use PikaJew002\Handrolled\Interfaces\User as UserInterface;
-use PikaJew002\Handrolled\Traits\Edibles;
+use PikaJew002\Handrolled\Database\Orm\Traits\HasToken;
 
 class User extends Entity implements UserInterface
 {
-    use Edibles;
+    use HasToken;
 
     protected string $tableName = 'users';
+    protected $primaryKey = 'id';
 
     // Entity database columns
     public $id;
@@ -21,30 +22,18 @@ class User extends Entity implements UserInterface
     public $created_at;
     public $updated_at;
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
     public function getUsername()
     {
         return $this->email;
     }
 
-    public function getPasswordHash()
+    public function getPasswordHash(): string
     {
         return $this->password_hash;
     }
 
-    public static function checkCredentials(string $username, string $password): ?self
+    public function tokens(): array
     {
-        $user = self::find([
-            'conditions' => ['email' => $username],
-        ]);
-        if(!empty($user) && password_verify($password, $user[0]->getPasswordHash())) {
-            return $user[0];
-        }
-
-        return null;
+        return $this->hasMany(Token::class, 'user_id');
     }
 }

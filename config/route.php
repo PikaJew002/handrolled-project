@@ -2,6 +2,8 @@
 
 return [
     'middleware' => [
-        //
+        'global' => [],
+        'api' => [],
+        'web' => [],
     ],
 ];

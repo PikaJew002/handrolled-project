@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use Exception;
-use PikaJew002\Handrolled\Exceptions;
 use PikaJew002\Handrolled\Http\Request;
 use PikaJew002\Handrolled\Http\Responses\HttpErrors\NotFoundResponse;
 use PikaJew002\Handrolled\Http\Responses\JsonResponse;
@@ -12,24 +11,29 @@ use PikaJew002\Handrolled\Interfaces\Response;
 
 class UsersController
 {
-    public function index(Request $request): Response
+    public function index(JsonResponse $response): Response
     {
         $users = User::all();
-        return new JsonResponse([
-            'users' => $users,
+
+        return $response->with([
+            'users' => array_map(function ($user) {
+                return $user->toArray();
+            }, $users),
         ]);
     }
 
-    public function view($id, Request $request): Response
+    public function view($id, JsonResponse $response, NotFoundResponse $notFoundResponse): Response
     {
         $user = User::findById($id);
+
         if(is_null($user)) {
-            return new NotFoundResponse();
+            return $notFoundResponse;
         }
-        return new JsonResponse(['user' => $user]);
+
+        return $response->with(['user' => $user->toArray()]);
     }
 
-    public function store(Request $request): Response
+    public function store(Request $request, JsonResponse $response): Response
     {
         $user = new User;
         $user->email = $request->input('email');
@@ -38,19 +42,19 @@ class UsersController
         $user->password_hash = password_hash($request->input('password'), PASSWORD_DEFAULT);
         $user->save();
 
-        return new JsonResponse([
-            'user' => $user,
-        ], 201);
+        return $response->setCode(201)->with([
+            'user' => $user->toArray(),
+        ]);
     }
 
-    public function destroy($id): Response
+    public function destroy($id, JsonResponse $response, NotFoundResponse $notFoundResponse): Response
     {
         $user = User::findById($id);
         if(is_null($user)) {
-            return new NotFoundResponse();
+            return $notFoundResponse;
         }
         if($user->delete()) {
-            return new JsonResponse(['user' => $user]);
+            return $response->with(['user' => $user->toArray()]);
         } else {
             throw new Exception('Database eror! Could not delete user!');
         }
